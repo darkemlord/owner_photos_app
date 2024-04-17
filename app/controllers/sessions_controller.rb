@@ -2,7 +2,7 @@
 
 # Sessions Controller
 class SessionsController < ApplicationController
-  def show
+  def new
     @user = User.new
   end
 
@@ -11,8 +11,6 @@ class SessionsController < ApplicationController
     if @user.valid?
       redirect_to root_path, notice: 'Session Started'
     else
-      puts '=============='
-      puts sessions_path
       render :new
     end
   end
