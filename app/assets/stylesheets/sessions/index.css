@@ -1,0 +1,16 @@
+.session-new-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-section {
+  display: flex;
+  gap: 8px;
+}
