@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.new(session_params)
+    puts @user.valid?
     if @user.valid?
+      puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
       redirect_to root_path, notice: 'Session Started'
     else
       render :new
@@ -18,6 +20,6 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:user_id, :user_password)
+    params.require(:user).permit(:user_id, :user_password)
   end
 end
