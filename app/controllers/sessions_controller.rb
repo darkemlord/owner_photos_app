@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
     @user = User.new(session_params)
     puts @user.valid?
     if @user.valid?
-      puts "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
       redirect_to root_path, notice: 'Session Started'
     else
       render :new
