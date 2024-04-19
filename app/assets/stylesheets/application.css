@@ -13,4 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+h1 {
+  margin: 0;
+}
 @import url("./sessions/index.css");
