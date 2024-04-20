@@ -2,14 +2,16 @@
 
 # Sessions Controller
 class SessionsController < ApplicationController
+  before_action :authenticated_user
   def new
-    @user = User.new
+    @user |= User.new
   end
 
   def create
     @user = User.find_by(user_id: params[:user_id])
     if @user.present? && @user.authenticate(params[:password])
-      # session[:user_id] = @user.id
+      session[:user_id] = @user.id
+      redirect_to photos_path
     else
       redirect_to sessions_path, notice: login_errors
     end
