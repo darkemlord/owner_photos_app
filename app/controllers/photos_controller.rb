@@ -4,6 +4,6 @@
 class PhotosController < ApplicationController
   before_action :check_authentication
   def index
-    @photos = []
+    @photos = @user.images.blobs
   end
 end

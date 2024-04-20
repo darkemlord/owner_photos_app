@@ -1,1 +1,12 @@
-<div>Hola desde photos</div>
+<div class="photos-container">
+  <h1>写真一覧</h1>
+  <%= @user.user_id %>
+  <div class="images-container">
+    <% @photos.each do |photo| %>
+    <div class="image-container">
+      <h5 class="image-title"><%= photo.filename %></h5>
+      <%= image_tag photo %>
+    </div>
+    <% end %>
+  </div>
+</div>

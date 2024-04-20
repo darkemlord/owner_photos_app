@@ -1,0 +1,23 @@
+.photos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+  width: 250px;
+  overflow: hidden;
+}
+
+.image-title {
+  text-align: center;
+}
