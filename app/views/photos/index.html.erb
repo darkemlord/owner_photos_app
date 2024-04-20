@@ -1,8 +1,9 @@
 <div class="photos-container">
   <h1>写真一覧</h1>
+  <%= link_to "写真アップロード画面", new_photo_path %>
   <%= @user.user_id %>
   <div class="images-container">
-    <% @photos.blobs.each do |photo| %>
+    <% @photos.each do |photo| %>
     <div class="image-container">
       <h5 class="image-title"><%= photo.filename %></h5>
       <%= image_tag photo %>

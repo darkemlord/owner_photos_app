@@ -1,5 +1,6 @@
 <div class="photos-new-container">
   <h1>写真アップロード</h1>
+
   <% if flash[:notice]%>
     <ul class="error-list">
       <% flash[:notice].each do |error| %>
@@ -7,6 +8,7 @@
       <% end %>
     </ul>
   <% end %>
+
   <%= form_with url: photos_path, method: :post, local: true, html: { multipart: true } do |form| %>
     <div class="form-container">
       <div class="form-section">
@@ -19,6 +21,7 @@
       </div>
       <div>
         <%= form.submit "アップロード" %>
+        <%= link_to 'キャンセル', photos_path %>
       </div>
     </div>
   <% end %>

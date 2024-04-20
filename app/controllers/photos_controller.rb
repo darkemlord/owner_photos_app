@@ -4,7 +4,7 @@
 class PhotosController < ApplicationController
   before_action :check_authentication
   def index
-    @photos = @user.images
+    @photos = @user.ordered_images
   end
 
   def new
@@ -12,16 +12,20 @@ class PhotosController < ApplicationController
   end
 
   def create
-    if @user.images.attach(io: params[:image], filename: params[:title])
-      redirect_to photos_path, notice: 'Photos uploaded successfully.'
+    if check_params && @user.images.attach(io: params[:image], filename: params[:title])
+      redirect_to photos_path
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_photo_path, notice: upload_errors
     end
   end
 
   def upload_errors
     error_messages = []
     error_messages.push('タイトルを入力してください。') if params[:title].blank?
-    error_messages.push('画像ファイルを入力してください。') if params[:photos].blank?
+    error_messages.push('画像ファイルを入力してください。') if params[:image].blank?
+  end
+
+  def check_params
+    params[:title].present? && params[:image].present?
   end
 end
