@@ -2,7 +2,7 @@
   <h1>写真一覧</h1>
   <%= @user.user_id %>
   <div class="images-container">
-    <% @photos.each do |photo| %>
+    <% @photos.blobs.each do |photo| %>
     <div class="image-container">
       <h5 class="image-title"><%= photo.filename %></h5>
       <%= image_tag photo %>

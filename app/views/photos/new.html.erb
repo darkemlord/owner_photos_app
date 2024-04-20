@@ -1,0 +1,25 @@
+<div class="photos-new-container">
+  <h1>写真アップロード</h1>
+  <% if flash[:notice]%>
+    <ul class="error-list">
+      <% flash[:notice].each do |error| %>
+          <li class="login-error"><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form_with url: photos_path, method: :post, local: true, html: { multipart: true } do |form| %>
+    <div class="form-container">
+      <div class="form-section">
+        <%= form.label :title, "タイトル" %><br>
+        <%= form.text_field :title %>
+      </div>
+      <div class="form-section">
+        <%= form.label :image, "画像ファイル" %>
+        <%= form.file_field :image, multiple: false, accept: "image/jpeg,image/gif,image/png" %>
+      </div>
+      <div>
+        <%= form.submit "アップロード" %>
+      </div>
+    </div>
+  <% end %>
+</div>
