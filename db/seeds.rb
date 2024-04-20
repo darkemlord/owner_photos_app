@@ -5,3 +5,5 @@
 #
 
 User.create(user_id: 'emanuel', password: 'emanuel123')
+
+# user.images.attach(io: File.open("app/assets/images/background_blog.jpeg"), filename: "emanuel_rock.jpeg")
