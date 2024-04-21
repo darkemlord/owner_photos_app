@@ -2,7 +2,7 @@
 
 # Sessions Controller
 class SessionsController < ApplicationController
-  before_action :authenticated_user
+  before_action :authenticated_user, only: [:new]
   def new
     @user |= User.new
   end
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
+  def logout
     session[:user_id] = nil
     redirect_to root_path
   end
