@@ -11,9 +11,6 @@
     <%= link_to "写真アップロード画面", new_photo_path %>
   </div>
   <div>
-    <%  if @token %>
-      <%= @token %>
-    <%  end %>
   </div>
   <div class="images-container">
     <% @photos.each do |photo| %>
@@ -23,7 +20,7 @@
         <%= image_tag(photo, class: "image") %>
       </div>
       <% if @token %>
-        <div>
+        <div class="button-container">
           <%= button_to 'Tweet This Photo', tweet_photo_path(photo), method: :post %>
         </div>
       <% end %>
