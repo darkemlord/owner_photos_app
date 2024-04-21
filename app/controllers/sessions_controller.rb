@@ -26,12 +26,25 @@ class SessionsController < ApplicationController
   # It's better to handle it from the UI
   def login_errors
     error_messages = []
-    error_messages.push('ウーザーIDを入力してください。') if params[:user_id].blank?
-    error_messages.push('パスワードを入力してください。') if params[:password].blank?
+    add_blank_field_errors(error_messages)
+    add_authentication_error(error_messages)
     error_messages
   end
 
   private
+
+  def add_blank_field_errors(error_messages)
+    error_messages.push('ウーザーIDを入力してください。') if params[:user_id].blank?
+    error_messages.push('パスワードを入力してください。') if params[:password].blank?
+  end
+
+  def add_authentication_error(error_messages)
+    error_messages.push('ユーザーID、もしくはパスワードが正しくありません。') if fields_present?
+  end
+
+  def fields_present?
+    !params[:user_id].blank? && !params[:password].blank?
+  end
 
   def session_params
     params.require(:user).permit(:user_id, :password)

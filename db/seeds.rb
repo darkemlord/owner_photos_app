@@ -18,8 +18,8 @@ image_files = [
 10.times do |i|
   user = User.create(user_id: "user#{i}", password: 'password')
   num_images = rand(1..5)
-  num_images.times do
-    image = image_files.sample
+  images_to_attach = image_files.shuffle.take(num_images)
+  images_to_attach.each do |image|
     user.images.attach(io: File.open(image), filename: File.basename(image))
   end
 end
