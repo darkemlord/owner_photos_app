@@ -2,7 +2,7 @@
 
 # Photos Controller
 class PhotosController < ApplicationController
-  before_action :check_authentication
+  before_action :authenticated_user
   def index
     @photos = @user.ordered_images
   end

@@ -11,7 +11,9 @@
     <% @photos.each do |photo| %>
     <div class="image-container">
       <h5 class="image-title"><%= photo.filename %></h5>
-      <%= image_tag photo %>
+      <div class="image-box">
+        <%= image_tag(photo, class: "image") %>
+      </div>
     </div>
     <% end %>
   </div>

@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
     @user = User.find(session[:user_id]) if session[:user_id]
   end
 
-  def check_authentication
-    if current_user.nil?
-      redirect_to root_path unless request.path == root_path
-    else
-      redirect_to photos_path unless request.path == photos_path
-    end
+  def require_authentication
+    redirect_to photos_path if current_user.present?
+  end
+
+  def authenticated_user
+    redirect_to root_path if current_user.nil?
   end
 end

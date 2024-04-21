@@ -25,3 +25,13 @@
 .user-title {
   margin: 0;
 }
+
+.image-box {
+  width: 250px;
+  height: 250px;
+}
+
+.image {
+  width: 250px;
+  height: 250px;
+}
