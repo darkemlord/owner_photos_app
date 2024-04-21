@@ -1,9 +1,9 @@
 <div class="photos-new-container">
   <h1>写真アップロード</h1>
 
-  <% if flash[:notice]%>
+  <% if flash[:alert]%>
     <ul class="error-list">
-      <% flash[:notice].each do |error| %>
+      <% flash[:alert].each do |error| %>
           <li class="login-error"><%= error %></li>
       <% end %>
     </ul>

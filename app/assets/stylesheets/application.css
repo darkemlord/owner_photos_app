@@ -18,6 +18,10 @@ h1 {
   margin: 0;
 }
 
+.success-notice {
+  color: green;
+}
+
 @import url("./sessions/index.css");
 @import url("./photos/index.css");
 @import url("./photos/new.css");

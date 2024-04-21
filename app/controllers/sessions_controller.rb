@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to photos_path
     else
-      redirect_to sessions_path, notice: login_errors
+      redirect_to sessions_path, alert: login_errors
     end
   end
 
@@ -35,15 +35,15 @@ class SessionsController < ApplicationController
 
   def oauth_callback
     if params[:error]
-      redirect_to photos_path, notice: ['認証を取得しようとして失敗しました。']
+      redirect_to photos_path, alert: '認証を取得しようとして失敗しました。'
     elsif params[:code]
       access_token = exchange_code_for_token(params[:code])
       if access_token
         session[:access_token] = access_token
       else
-        redirect_to photos_path, notice: ['認証を取得しようとして失敗しました。']
+        redirect_to photos_path, alert: '認証を取得しようとして失敗しました。'
       end
-      redirect_to photos_path
+      redirect_to photos_path, notice: '認証が成功しました！'
     end
   end
 

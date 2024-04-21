@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
     if check_params && @user.images.attach(io: params[:image], filename: params[:title])
       redirect_to photos_path
     else
-      redirect_to new_photo_path, notice: upload_errors
+      redirect_to new_photo_path, alert: upload_errors
     end
   end
 
