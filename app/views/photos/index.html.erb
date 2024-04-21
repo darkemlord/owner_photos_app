@@ -1,8 +1,12 @@
 <div class="photos-container">
   <h1>写真一覧</h1>
-  <%= link_to "Log out", logout_path, data: {turbo_method: :delete} %>
-  <%= link_to "写真アップロード画面", new_photo_path %>
-  <%= @user.user_id %>
+  <h5 class="user-title">ウーザー：<%= @user.user_id %></h5>
+  <div>
+    <%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %>
+  </div>
+  <div>
+    <%= link_to "写真アップロード画面", new_photo_path %>
+  </div>
   <div class="images-container">
     <% @photos.each do |photo| %>
     <div class="image-container">

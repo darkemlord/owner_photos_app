@@ -2,7 +2,7 @@
 
 # Sessions Controller
 class SessionsController < ApplicationController
-  before_action :authenticated_user, only: [:new]
+  before_action :check_authentication, only: [:new]
   def new
     @user |= User.new
   end

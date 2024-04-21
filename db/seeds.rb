@@ -2,8 +2,32 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 # Examples:
-#
 
-User.create(user_id: 'emanuel', password: 'emanuel123')
+puts '============================'
+puts 'Start seeding'
 
-# user.images.attach(io: File.open("app/assets/images/background_blog.jpeg"), filename: "emanuel_rock.jpeg")
+image_files = [
+  'app/assets/images/image1.png',
+  'app/assets/images/image2.jpeg',
+  'app/assets/images/image3.jpeg',
+  'app/assets/images/image4.jpeg',
+  'app/assets/images/me.jpg'
+]
+
+# Create 10 users
+10.times do |i|
+  user = User.create(user_id: "user#{i}", password: 'password')
+  num_images = rand(1..5)
+  num_images.times do
+    image = image_files.sample
+    user.images.attach(io: File.open(image), filename: File.basename(image))
+  end
+end
+
+me = User.create(user_id: 'emanuel', password: 'password')
+image_files.each do |image|
+  me.images.attach(io: File.open(image), filename: File.basename(image))
+end
+
+puts 'Succesfully done!'
+puts '============================'
