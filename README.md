@@ -26,6 +26,12 @@ In the main root exec this command to create, migrate and seed DB
   ./refresh_db.sh
 ```
 
+if you experience permission issues exec this comand
+
+```typescript
+  chmod +x refresh_db.sh
+```
+
 ## Set the ENV files with the correct credentials
 
 ```typescript
