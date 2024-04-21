@@ -8,9 +8,6 @@
   <% end %>
   <h5 class="user-title">ウーザー：<%= @user.user_id %></h5>
   <div>
-    <%= link_to "ログアウト", logout_path, data: {turbo_method: :delete} %>
-  </div>
-  <div>
     <%= link_to 'MyTweetAppと連携', "http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/oauth/authorize?client_id=#{ENV['CLIENT_ID']}&response_type=code&scope=write_tweet&redirect_uri=#{oauth_callback_url(only_path: false)}", target: '_blank' %>
   </div>
   <div>
