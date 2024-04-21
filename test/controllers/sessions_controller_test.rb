@@ -1,7 +1,13 @@
-require "test_helper"
+# frozen_string_literal: true
 
+require 'test_helper'
+
+# Tests for sessions controller
 class SessionsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @user = User.create(user_id: 'user13', password: 'password')
+  end
+  test 'Should authenticate user' do
+    assert @user.valid?
+  end
 end

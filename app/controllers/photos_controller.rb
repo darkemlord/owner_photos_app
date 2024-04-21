@@ -7,9 +7,9 @@ require 'json'
 # Photos Controller
 class PhotosController < ApplicationController
   before_action :authenticated_user
+  before_action :current_token, only: %i[index tweet]
   def index
     @photos = @user.ordered_images
-    @token = session[:access_token] if session[:access_token]
   end
 
   def new
@@ -27,19 +27,23 @@ class PhotosController < ApplicationController
   def tweet
     @photo = @user.images.find(params[:id])
     full_photos_url = url_for(controller: 'photos', action: 'index', only_path: false, host: request.host_with_port)
-    redirect_to photos_path if tweet_photo(@photo.filename, full_photos_url)
+    redirect_to photos_path, notice: 'ツイートが成功しました。' if tweet_photo(@photo.filename, full_photos_url, @token)
+  end
+
+  def tweet_photo(title, image_url, token)
+    uri = URI('http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/api/tweets')
+    data = { 'text': title, 'url': image_url }
+    json_data = data.to_json
+    request = Net::HTTP::Post.new(uri)
+    request.body = json_data
+    request['Content-Type'] = 'application/json'
+    request['Authorization'] = "Bearer #{token}"
+    Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.request(request)
+    end
   end
 
   private
-
-  def tweet_photo(title, image_url)
-    uri = URI('http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/api/tweets')
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json', 'Authorization' => "Bearer #{@token}")
-    request.body = { text: title, url: image_url }.to_json
-    response = http.request(request)
-    response.is_a?(Net::HTTPSuccess)
-  end
 
   def upload_errors
     error_messages = []
@@ -49,5 +53,9 @@ class PhotosController < ApplicationController
 
   def check_params
     params[:title].present? && params[:image].present?
+  end
+
+  def current_token
+    @token = session[:access_token] if session[:access_token]
   end
 end
