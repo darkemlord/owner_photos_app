@@ -1,8 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
 Things you may want to cover:
 
 ## Ruby version
@@ -17,13 +14,26 @@ Things you may want to cover:
 
 - Configuration
 
+## DB
+
+- Postgresql
+
 ## Database creation
 
+In the main root exec this command to create, migrate and seed DB
+
 ```typescript
-  rails db:create
+  ./refresh_db.sh
 ```
 
-- Database initialization
+## Set the ENV files with the correct credentials
+
+```typescript
+  CLIENT_ID=**********************
+  CLIENT_SECRET=********************
+```
+
+### Uncommented Gems and Additional Gems
 
 - How to run the test suite
 
