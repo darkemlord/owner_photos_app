@@ -15,7 +15,7 @@ module OauthHelper
     request.set_form_data(
       'grant_type' => 'authorization_code',
       'code' => code,
-      'redirect_uri' => 'http://localhost:3000/oauth/callback',
+      'redirect_uri' => oauth_callback_url(only_path: false),
       'client_id' => ENV['CLIENT_ID'],
       'client_secret' => ENV['CLIENT_SECRET']
     )
