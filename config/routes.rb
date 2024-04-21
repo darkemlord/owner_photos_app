@@ -7,4 +7,9 @@ Rails.application.routes.draw do
   get '/oauth/callback', to: 'sessions#oauth_callback', as: 'oauth_callback'
   resources :sessions, only: %i[new create]
   resources :photos, only: %i[index new create]
+  resources :photos do
+    member do
+      post 'tweet'
+    end
+  end
 end

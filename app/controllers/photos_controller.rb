@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'net/http'
+require 'uri'
+require 'json'
+
 # Photos Controller
 class PhotosController < ApplicationController
   before_action :authenticated_user
@@ -18,6 +22,27 @@ class PhotosController < ApplicationController
     else
       redirect_to new_photo_path, notice: upload_errors
     end
+  end
+
+  def tweet
+    @photo = @user.images.find(params[:id])
+    full_photos_url = url_for(controller: 'photos', action: 'index', only_path: false, host: request.host_with_port)
+    if tweet_photo(@photo.filename, full_photos_url)
+      redirect_to photos_path, notice: ['Tweet successfully posted!']
+    else
+      redirect_to photos_path, notice: ['Failed to post tweet.']
+    end
+  end
+
+  private
+
+  def tweet_photo(title, image_url)
+    uri = URI('http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/api/tweets')
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Post.new(uri, 'Content-Type' => 'application/json', 'Authorization' => "Bearer #{@token}")
+    request.body = { text: title, url: image_url }.to_json
+    response = http.request(request)
+    response.is_a?(Net::HTTPSuccess)
   end
 
   def upload_errors

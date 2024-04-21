@@ -34,15 +34,14 @@ class SessionsController < ApplicationController
 
   def oauth_callback
     if params[:error]
-      redirect_to photos_path
+      redirect_to photos_path, notice: ['認証を取得しようとして失敗しました。']
     elsif params[:code]
       access_token = exchange_code_for_token(params[:code])
       if access_token
-        puts '=================='
         puts access_token
         session[:access_token] = access_token
       else
-        redirect_to photos_path, notice: ["Failed to exchance the authorization code"]
+        redirect_to photos_path, notice: ['認証を取得しようとして失敗しました。']
       end
       puts params[:code]
       redirect_to photos_path
