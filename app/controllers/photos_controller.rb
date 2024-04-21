@@ -27,11 +27,7 @@ class PhotosController < ApplicationController
   def tweet
     @photo = @user.images.find(params[:id])
     full_photos_url = url_for(controller: 'photos', action: 'index', only_path: false, host: request.host_with_port)
-    if tweet_photo(@photo.filename, full_photos_url)
-      redirect_to photos_path
-    else
-      redirect_to photos_path
-    end
+    redirect_to photos_path if tweet_photo(@photo.filename, full_photos_url)
   end
 
   private
