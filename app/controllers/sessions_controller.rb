@@ -2,6 +2,7 @@
 
 # Sessions Controller
 class SessionsController < ApplicationController
+  include OauthHelper
   before_action :require_authentication, only: [:new]
   def new
     @user |= User.new
@@ -29,6 +30,23 @@ class SessionsController < ApplicationController
     add_blank_field_errors(error_messages)
     add_authentication_error(error_messages)
     error_messages
+  end
+
+  def oauth_callback
+    if params[:error]
+      redirect_to photos_path
+    elsif params[:code]
+      access_token = exchange_code_for_token(params[:code])
+      if access_token
+        puts '=================='
+        puts access_token
+        session[:access_token] = access_token
+      else
+        redirect_to photos_path, notice: ["Failed to exchance the authorization code"]
+      end
+      puts params[:code]
+      redirect_to photos_path
+    end
   end
 
   private

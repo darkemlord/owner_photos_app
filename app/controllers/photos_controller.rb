@@ -5,6 +5,7 @@ class PhotosController < ApplicationController
   before_action :authenticated_user
   def index
     @photos = @user.ordered_images
+    @token = session[:access_token] if session[:access_token]
   end
 
   def new
