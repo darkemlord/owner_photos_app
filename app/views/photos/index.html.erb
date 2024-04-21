@@ -22,9 +22,11 @@
       <div class="image-box">
         <%= image_tag(photo, class: "image") %>
       </div>
-      <div>
-        <%= button_to 'Tweet This Photo', tweet_photo_path(photo), method: :post %>
-      </div>
+      <% if @token %>
+        <div>
+          <%= button_to 'Tweet This Photo', tweet_photo_path(photo), method: :post %>
+        </div>
+      <% end %>
     </div>
     <% end %>
   </div>

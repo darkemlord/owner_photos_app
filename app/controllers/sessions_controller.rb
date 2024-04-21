@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
 
   def logout
     session[:user_id] = nil
+    session[:access_token] = nil
     redirect_to root_path
   end
 
@@ -38,12 +39,10 @@ class SessionsController < ApplicationController
     elsif params[:code]
       access_token = exchange_code_for_token(params[:code])
       if access_token
-        puts access_token
         session[:access_token] = access_token
       else
         redirect_to photos_path, notice: ['認証を取得しようとして失敗しました。']
       end
-      puts params[:code]
       redirect_to photos_path
     end
   end
