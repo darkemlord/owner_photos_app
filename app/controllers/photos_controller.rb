@@ -7,6 +7,7 @@ require 'json'
 # Photos Controller
 class PhotosController < ApplicationController
   include OauthHelper
+  include TweetHelper
   helper_method :oauth_authorize_url
   before_action :authenticated_user
   before_action :current_token, only: %i[index tweet]
@@ -29,20 +30,7 @@ class PhotosController < ApplicationController
   def tweet
     @photo = @user.images.find(params[:id])
     full_photos_url = url_for(controller: 'photos', action: 'index', only_path: false, host: request.host_with_port)
-    redirect_to photos_path, notice: 'ツイートが成功しました。' if tweet_photo(@photo.filename, full_photos_url, @token)
-  end
-
-  def tweet_photo(title, image_url, token)
-    uri = URI('http://unifa-recruit-my-tweet-app.ap-northeast-1.elasticbeanstalk.com/api/tweets')
-    data = { 'text': title, 'url': image_url }
-    json_data = data.to_json
-    request = Net::HTTP::Post.new(uri)
-    request.body = json_data
-    request['Content-Type'] = 'application/json'
-    request['Authorization'] = "Bearer #{token}"
-    Net::HTTP.start(uri.hostname, uri.port) do |http|
-      http.request(request)
-    end
+    tweet_photo(@photo.filename, full_photos_url, @token)
   end
 
   private
