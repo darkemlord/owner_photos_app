@@ -1,5 +1,20 @@
 # README
 
+Make sure the bundler version is upper than 2.5 if you have issues run this command.
+Bundler のバージョンが 2.5 以上であることを確認してください。問題が発生した場合は、このコマンドを実行してください。
+
+```bash
+  gem install bundler -v '~> 2.5'
+```
+
+## Initializing
+
+- Please install all gems before starting./開始する前にすべての GEM をインストールしてください。
+
+```bash
+bundle install
+```
+
 ## Ruby version/Ruby のバージョン
 
 - ruby 3.0.6p216 (2023-03-30 revision 23a532679b) [x86_64-darwin21]
@@ -53,10 +68,8 @@ password: password
 
 ## Others
 
-- How to run the test suite
+- How to run the test suite / テストスイートの実行方法
 
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+```bash
+  rails test test/
+```
