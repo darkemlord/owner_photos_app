@@ -9,7 +9,7 @@ Bundler のバージョンが 2.5 以上であることを確認してくださ�
 
 ## Initializing
 
-- Please install all gems before starting./開始する前にすべての GEM をインストールしてください。
+- Please install all gems before starting. / 開始する前にすべての GEM をインストールしてください。
 
 ```bash
 bundle install
@@ -47,7 +47,7 @@ if you experience permission issues exec this command.
   chmod +x refresh_db.sh
 ```
 
-## USER FOR TEST THE APP/ アプリのテスト用ユーザー
+## User for testing app / アプリのテスト用ユーザー
 
 ```bash
 user_id: user0
@@ -55,6 +55,10 @@ password: password
 ```
 
 ## Set the ENV files with the correct credentials
+
+- Ask for the credentials if you don't have it. / 資格情報を持っていない場合は、資格情報を求めてください。
+- create and .env file in the root directory. / ルートディレクトリに.env ファイルを作成してください。
+- If you don't set this the cooperation tweet feature will fail. / これを設定しないと、ツイート連携機能が失敗します。
 
 ```typescript
   CLIENT_ID=**********************
