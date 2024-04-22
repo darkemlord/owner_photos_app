@@ -6,6 +6,8 @@ require 'json'
 
 # Photos Controller
 class PhotosController < ApplicationController
+  include OauthHelper
+  helper_method :oauth_authorize_url
   before_action :authenticated_user
   before_action :current_token, only: %i[index tweet]
   def index
